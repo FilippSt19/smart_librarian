@@ -1,0 +1,257 @@
+## Title: The Hobbit
+
+Author: J.R.R. Tolkien
+
+Genre: Fantasy
+
+Themes: Friendship, Adventure, Courage, Personal Growth
+
+Summary:
+Bilbo Baggins, a quiet hobbit, joins a group of dwarves on a quest to reclaim their homeland from the dragon Smaug. Along the journey, he discovers bravery, loyalty, and confidence while facing trolls, goblins, elves, and other magical creatures.
+
+------------------------------------------------------------
+
+## Title: Harry Potter and the Philosopher's Stone
+
+Author: J.K. Rowling
+
+Genre: Fantasy
+
+Themes: Magic, Friendship, Good vs Evil
+
+Summary:
+Harry Potter discovers that he is a wizard and begins studying at Hogwarts School of Witchcraft and Wizardry. Alongside his friends Ron and Hermione, he uncovers secrets about his past and confronts the dark wizard Voldemort.
+
+------------------------------------------------------------
+
+## Title: 1984
+
+Author: George Orwell
+
+Genre: Dystopian Fiction
+
+Themes: Freedom, Surveillance, Totalitarianism
+
+Summary:
+Winston Smith lives in a society controlled by Big Brother, where independent thinking is forbidden. As he secretly rebels against the oppressive government, he learns the devastating consequences of resisting absolute power.
+
+------------------------------------------------------------
+
+## Title: Animal Farm
+
+Author: George Orwell
+
+Genre: Political Satire
+
+Themes: Power, Corruption, Equality
+
+Summary:
+Farm animals overthrow their human owner hoping to create a fair society. However, the pigs gradually become just as oppressive as the humans, illustrating how power can corrupt even noble ideals.
+
+------------------------------------------------------------
+
+## Title: Dune
+
+Author: Frank Herbert
+
+Genre: Science Fiction
+
+Themes: Politics, Destiny, Ecology
+
+Summary:
+Paul Atreides travels to the desert planet Arrakis, the only source of the valuable spice melange. He becomes involved in political conflicts and discovers his destiny as a leader who could change the galaxy.
+
+------------------------------------------------------------
+
+## Title: The Lord of the Rings
+
+Author: J.R.R. Tolkien
+
+Genre: Epic Fantasy
+
+Themes: Friendship, Sacrifice, Hope
+
+Summary:
+Frodo Baggins embarks on a dangerous journey to destroy the One Ring before it falls into the hands of the Dark Lord Sauron. Together with loyal companions, he fights against overwhelming darkness.
+
+------------------------------------------------------------
+
+## Title: The Chronicles of Narnia: The Lion, the Witch and the Wardrobe
+
+Author: C.S. Lewis
+
+Genre: Fantasy
+
+Themes: Courage, Family, Good vs Evil
+
+Summary:
+Four siblings discover a magical world hidden inside a wardrobe. They join Aslan, the great lion, in the battle against the White Witch who has trapped Narnia in an endless winter.
+
+------------------------------------------------------------
+
+## Title: Pride and Prejudice
+
+Author: Jane Austen
+
+Genre: Romance
+
+Themes: Love, Society, Family
+
+Summary:
+Elizabeth Bennet navigates family expectations, social class, and misunderstandings while developing an unexpected relationship with the proud but honorable Mr. Darcy.
+
+------------------------------------------------------------
+
+## Title: The Great Gatsby
+
+Author: F. Scott Fitzgerald
+
+Genre: Classic
+
+Themes: Wealth, Love, American Dream
+
+Summary:
+Jay Gatsby devotes his life to winning back Daisy Buchanan, believing wealth can recreate the past. The novel explores ambition, illusion, and the emptiness of material success.
+
+------------------------------------------------------------
+
+## Title: To Kill a Mockingbird
+
+Author: Harper Lee
+
+Genre: Historical Fiction
+
+Themes: Justice, Racism, Compassion
+
+Summary:
+Young Scout Finch grows up in a small Southern town where her father, lawyer Atticus Finch, defends a Black man falsely accused of a crime, teaching valuable lessons about justice and empathy.
+
+------------------------------------------------------------
+
+## Title: The Book Thief
+
+Author: Markus Zusak
+
+Genre: Historical Fiction
+
+Themes: War, Family, Hope
+
+Summary:
+During World War II, a young girl named Liesel discovers comfort in stealing books and sharing stories while living with her foster family in Nazi Germany.
+
+------------------------------------------------------------
+
+## Title: The Alchemist
+
+Author: Paulo Coelho
+
+Genre: Adventure
+
+Themes: Dreams, Destiny, Self-discovery
+
+Summary:
+A young shepherd named Santiago journeys across the desert in search of treasure but ultimately discovers that the greatest riches come from following one's dreams.
+
+------------------------------------------------------------
+
+## Title: Brave New World
+
+Author: Aldous Huxley
+
+Genre: Dystopian Fiction
+
+Themes: Technology, Happiness, Society
+
+Summary:
+In a futuristic society where people are genetically engineered and controlled through pleasure, one outsider questions whether true happiness can exist without freedom.
+
+------------------------------------------------------------
+
+## Title: Fahrenheit 451
+
+Author: Ray Bradbury
+
+Genre: Dystopian Fiction
+
+Themes: Knowledge, Freedom, Censorship
+
+Summary:
+Fireman Guy Montag burns books for a living until he begins questioning society's fear of knowledge. His transformation leads him to challenge a world built on censorship.
+
+------------------------------------------------------------
+
+## Title: Sherlock Holmes: A Study in Scarlet
+
+Author: Arthur Conan Doyle
+
+Genre: Mystery
+
+Themes: Logic, Crime, Investigation
+
+Summary:
+Dr. Watson meets the brilliant detective Sherlock Holmes, whose extraordinary powers of observation help solve a mysterious murder through careful deduction.
+
+------------------------------------------------------------
+
+## Title: Dracula
+
+Author: Bram Stoker
+
+Genre: Horror
+
+Themes: Fear, Good vs Evil, Immortality
+
+Summary:
+A group of determined individuals unites to stop Count Dracula, an ancient vampire who seeks to spread terror across England.
+
+------------------------------------------------------------
+
+## Title: The Little Prince
+
+Author: Antoine de Saint-Exupéry
+
+Genre: Philosophical Fiction
+
+Themes: Friendship, Love, Imagination
+
+Summary:
+A stranded pilot meets a mysterious young prince who shares stories from different planets, offering timeless lessons about friendship, love, and what truly matters in life.
+
+------------------------------------------------------------
+
+## Title: The Catcher in the Rye
+
+Author: J.D. Salinger
+
+Genre: Coming-of-Age
+
+Themes: Identity, Loneliness, Growing Up
+
+Summary:
+Teenager Holden Caulfield wanders through New York City after leaving school, struggling with loneliness, identity, and the transition into adulthood.
+
+------------------------------------------------------------
+
+## Title: The Kite Runner
+
+Author: Khaled Hosseini
+
+Genre: Historical Fiction
+
+Themes: Friendship, Redemption, Family
+
+Summary:
+Amir struggles with guilt over betraying his childhood friend Hassan and later returns to Afghanistan seeking redemption while confronting his painful past.
+
+------------------------------------------------------------
+
+## Title: The Martian
+
+Author: Andy Weir
+
+Genre: Science Fiction
+
+Themes: Survival, Science, Determination
+
+Summary:
+Astronaut Mark Watney is stranded alone on Mars after being presumed dead. Using science, creativity, and perseverance, he fights to survive until a rescue mission can reach him.
