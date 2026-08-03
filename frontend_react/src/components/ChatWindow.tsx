@@ -1,35 +1,30 @@
 import ChatMessage from "./ChatMessage";
 
-export type Message = {
-    role: "user" | "assistant";
-    content: string;
-};
+import type {
+    ChatMessage as Message,
+} from "../types/chat";
 
-type ChatWindowProps = {
+type Props = {
     messages: Message[];
 };
 
 export default function ChatWindow({
     messages,
-}: ChatWindowProps) {
+}: Props) {
 
     return (
-        <div
-            style={{
-                padding: "24px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "16px",
-                overflowY: "auto",
-            }}
-        >
-            {messages.map((message, index) => (
+        <div className="chat-window">
+
+            {messages.map((message) => (
+
                 <ChatMessage
-                    key={index}
+                    key={message.id}
                     role={message.role}
                     content={message.content}
                 />
+
             ))}
+
         </div>
     );
 }
