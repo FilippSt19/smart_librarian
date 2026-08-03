@@ -1,0 +1,35 @@
+.navbar {
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 32px;
+
+    background: white;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+
+}
+
+.navbar__logo {
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+}
+
+.navbar__right {
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+}

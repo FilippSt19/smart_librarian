@@ -10,12 +10,16 @@ const api = axios.create({
 });
 
 export async function sendMessage(
-    request: ChatRequest
+    query: string
 ): Promise<ChatResponse> {
+
+    const request: ChatRequest = {
+        query,
+    };
 
     const response = await api.post<ChatResponse>(
         "/chat",
-        request
+        request,
     );
 
     return response.data;
