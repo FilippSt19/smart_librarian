@@ -1,8 +1,21 @@
 import Navbar from "./shared/navbar";
 import Header from "./components/Header";
-import ChatMessage from "./components/ChatMessage";
+import ChatWindow from "./components/ChatWindow";
 
 function App() {
+
+    const messages = [
+        {
+            role: "user" as const,
+            content: "I want a fantasy book.",
+        },
+        {
+            role: "assistant" as const,
+            content:
+                "I recommend The Hobbit because it is a classic fantasy novel.",
+        },
+    ];
+
     return (
         <>
             <Navbar />
@@ -12,21 +25,9 @@ function App() {
                 subtitle="AI Book Recommendation System"
             />
 
-            <div
-                style={{
-                    padding: "32px",
-                }}
-            >
-                <ChatMessage
-                    role="user"
-                    content="I want a fantasy book."
-                />
-
-                <ChatMessage
-                    role="assistant"
-                    content="I recommend The Hobbit because it is a classic fantasy novel about friendship, courage and adventure."
-                />
-            </div>
+            <ChatWindow
+                messages={messages}
+            />
         </>
     );
 }
