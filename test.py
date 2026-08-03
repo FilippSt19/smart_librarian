@@ -1,13 +1,9 @@
-from openai import OpenAI
-from app.config import OPENAI_API_KEY
+from app.rag import RAGRetriever
 
-print(OPENAI_API_KEY[:10])
+retriever = RAGRetriever()
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+results = retriever.retrieve(
+    "I want a book about friendship and magic."
+)
 
-try:
-    models = client.models.list()
-    print("SUCCESS")
-except Exception as e:
-    print(type(e))
-    print(e)
+print(results)

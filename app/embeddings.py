@@ -20,3 +20,4 @@ class EmbeddingService:
                 "Nu s-a putut realiza conexiunea la OpenAI. "
                 "Verifică DNS-ul, VPN-ul, proxy-ul și firewall-ul."
             ) from exc
+            
