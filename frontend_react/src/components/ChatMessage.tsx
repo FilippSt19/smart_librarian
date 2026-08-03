@@ -1,4 +1,5 @@
 import "../styles/chat.css";
+import ReactMarkdown from "react-markdown";
 
 type ChatMessageProps = {
     role: "user" | "assistant";
@@ -30,7 +31,9 @@ export default function ChatMessage({
 
                 <div className="message-content">
 
-                    {content}
+                    <ReactMarkdown>
+                        {content}
+                    </ReactMarkdown>
 
                 </div>
 

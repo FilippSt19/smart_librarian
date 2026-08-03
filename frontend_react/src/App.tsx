@@ -4,6 +4,7 @@ import Navbar from "./shared/navbar";
 import Header from "./components/Header";
 import ChatWindow from "./components/ChatWindow";
 import ChatInput from "./components/ChatInput";
+import { sendMessage } from "./services/api";
 
 import type {
     ChatMessage,
@@ -21,21 +22,73 @@ function App() {
             },
         ]);
 
-    function handleSend(
+    async function handleSend(
         message: string
     ) {
+
+        // User message
+
+        const userMessage = {
+            id: crypto.randomUUID(),
+            role: "user" as const,
+            content: message,
+        };
 
         setMessages((previous) => [
 
             ...previous,
 
-            {
-                id: crypto.randomUUID(),
-                role: "user",
-                content: message,
-            },
+            userMessage,
 
         ]);
+
+        try {
+
+            const result = await sendMessage(message);
+
+            const assistantMessage = {
+
+                id: crypto.randomUUID(),
+
+                role: "assistant" as const,
+
+                content: result.response,
+
+            };
+
+            setMessages((previous) => [
+
+                ...previous,
+
+                assistantMessage,
+
+            ]);
+
+        } catch (error) {
+
+            const assistantMessage = {
+
+                id: crypto.randomUUID(),
+
+                role: "assistant" as const,
+
+                content:
+                    "❌ Unable to contact the backend.",
+
+            };
+
+            setMessages((previous) => [
+
+                ...previous,
+
+                assistantMessage,
+
+            ]);
+
+            console.error(error);
+
+        }
+
     }
 
     return (
@@ -44,7 +97,7 @@ function App() {
             <Navbar />
 
             <Header
-                title="📚 Smart Librarian"
+                title=" Smart Librarian"
                 subtitle="Discover your next favorite book using AI."
             />
 

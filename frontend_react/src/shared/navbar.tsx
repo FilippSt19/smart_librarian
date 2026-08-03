@@ -8,7 +8,7 @@ export default function Navbar() {
             </div>
 
             <div className="navbar__right">
-                AI Book Recommendation System
+                powered by OpenAI
             </div>
         </nav>
     );
