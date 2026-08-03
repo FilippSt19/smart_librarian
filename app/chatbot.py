@@ -3,6 +3,7 @@ import json
 from openai import OpenAI
 
 from app.config import Config
+from app.prompts import SYSTEM_PROMPT
 from app.rag import RAGRetriever
 from app.tools import BookTools
 
@@ -36,7 +37,8 @@ BOOK_TOOLS = [
 class SmartLibrarian:
     """
     AI chatbot that recommends books using
-    RAG + OpenAI Function Calling.
+    Retrieval-Augmented Generation (RAG)
+    and OpenAI Function Calling.
     """
 
     def __init__(self):
@@ -75,13 +77,15 @@ class SmartLibrarian:
         query: str,
     ) -> str:
         """
-        Chat with the Smart Librarian.
+        Generate a recommendation using
+        RAG + Function Calling.
         """
-
+        
         # Retrieve relevant documents
+
         documents = self.retriever.retrieve(
             query=query,
-            n_results=Config.DEFAULT_N_RESULTS if Config.DEFAULT_N_RESULTS is not None else 10,
+            n_results=Config.DEFAULT_N_RESULTS,
         )
 
         context = self.build_context(documents)
@@ -89,19 +93,11 @@ class SmartLibrarian:
         messages = [
             {
                 "role": "system",
-                "content": (
-                    "You are a helpful librarian.\n"
-                    "Recommend exactly ONE book.\n"
-                    "Only use the provided context.\n"
-                    "If a tool is available and useful, call it.\n"
-                    "After receiving the tool result, generate a natural answer "
-                    "that includes both the recommendation and the full summary."
-                ),
+                "content": SYSTEM_PROMPT,
             },
             {
                 "role": "user",
-                "content": (
-                    f"""
+                "content": f"""
 Context:
 
 {context}
@@ -109,12 +105,12 @@ Context:
 User request:
 
 {query}
-"""
-                ),
+""",
             },
         ]
+        
+        # First LLM Call
 
-        # First LLM call
         response = self.client.chat.completions.create(
             model=Config.CHAT_MODEL,
             temperature=Config.TEMPERATURE,
@@ -125,9 +121,12 @@ User request:
 
         message = response.choices[0].message
 
-        # No tool needed
+        # Normal response
+    
         if not message.tool_calls:
             return message.content or "No response generated."
+        
+        # Tool Calling
 
         tool_call = message.tool_calls[0]
 
@@ -139,7 +138,7 @@ User request:
 
         tool_functions = {
             "get_summary_by_title":
-                self.tools.get_summary_by_title
+                self.tools.get_summary_by_title,
         }
 
         if function_name not in tool_functions:
@@ -151,10 +150,13 @@ User request:
             function_name
         ](**arguments)
 
-        # Append assistant message containing tool call
+       
+        # Append assistant message
+       
         messages.append(message)
+        
+        # Append tool result
 
-        # Append tool response
         messages.append(
             {
                 "role": "tool",
@@ -163,7 +165,8 @@ User request:
             }
         )
 
-        # Second LLM call
+        # Final LLM Call
+        
         final_response = self.client.chat.completions.create(
             model=Config.CHAT_MODEL,
             temperature=Config.TEMPERATURE,

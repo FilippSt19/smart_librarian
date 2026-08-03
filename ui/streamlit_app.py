@@ -2,27 +2,87 @@ import streamlit as st
 
 from app.chatbot import SmartLibrarian
 
-chatbot = SmartLibrarian()
 
 st.set_page_config(
     page_title="Smart Librarian",
     page_icon="📚",
+    layout="centered",
 )
+
+chatbot = SmartLibrarian()
 
 st.title("📚 Smart Librarian")
 
-query = st.text_input(
+st.caption(
+    "Discover your next favorite book using AI, RAG and OpenAI."
+)
+
+with st.sidebar:
+
+    st.header("📖 Example Questions")
+
+    st.markdown(
+        """
+- I want a fantasy book about friendship.
+- Recommend a romance novel.
+- Suggest a dystopian book.
+- I love war stories.
+- Recommend a science fiction novel.
+"""
+    )
+
+    if st.button("🗑 Clear Conversation"):
+
+        st.session_state.messages = []
+
+if "messages" not in st.session_state:
+
+    st.session_state.messages = []
+
+for message in st.session_state.messages:
+
+    with st.chat_message(message["role"]):
+
+        st.markdown(message["content"])
+
+prompt = st.chat_input(
     "What kind of book are you looking for?"
 )
 
-if st.button("Recommend"):
+if prompt:
 
-    if query.strip():
+    st.session_state.messages.append(
+        {
+            "role": "user",
+            "content": prompt,
+        }
+    )
 
-        with st.spinner("Searching for the perfect book..."):
+    with st.chat_message("user"):
 
-            response = chatbot.chat(query)
+        st.markdown(prompt)
 
-        st.success("Recommendation")
+    with st.chat_message("assistant"):
 
-        st.write(response)
+        with st.spinner(
+            "Searching for the perfect book..."
+        ):
+
+            try:
+
+                response = chatbot.chat(prompt)
+
+                st.markdown(response)
+
+                st.session_state.messages.append(
+                    {
+                        "role": "assistant",
+                        "content": response,
+                    }
+                )
+
+            except Exception as exc:
+
+                st.error(
+                    f"Unexpected error:\n\n{exc}"
+                )
