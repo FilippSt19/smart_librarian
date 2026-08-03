@@ -2,9 +2,10 @@ from typing import Any
 
 import chromadb
 
-from app.config import CHROMA_DB_PATH, COLLECTION_NAME
+# from .config import CHROMA_DB_PATH, COLLECTION_NAME
 
 
+from .config import Config
 class VectorStore:
     """
     Handles all interactions with the ChromaDB vector database.
@@ -12,11 +13,11 @@ class VectorStore:
 
     def __init__(self) -> None:
         self.client = chromadb.PersistentClient(
-            path=CHROMA_DB_PATH
+            path=Config.CHROMA_DB_PATH
         )
 
         self.collection = self.client.get_or_create_collection(
-            name=COLLECTION_NAME
+            name=Config.COLLECTION_NAME
         )
 
     def add_document(

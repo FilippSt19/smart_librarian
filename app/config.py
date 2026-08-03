@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 class Config:
     """
     Application configuration.
@@ -24,3 +23,5 @@ class Config:
     # ChromaDB
     CHROMA_DB_PATH = "data/chroma_db"
     COLLECTION_NAME = "book_summaries"
+    DEFAULT_N_RESULTS = 10
+    TEMPERATURE=0.7

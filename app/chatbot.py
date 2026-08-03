@@ -81,7 +81,7 @@ class SmartLibrarian:
         # Retrieve relevant documents
         documents = self.retriever.retrieve(
             query=query,
-            n_results=Config.DEFAULT_N_RESULTS,
+            n_results=Config.DEFAULT_N_RESULTS if Config.DEFAULT_N_RESULTS is not None else 10,
         )
 
         context = self.build_context(documents)

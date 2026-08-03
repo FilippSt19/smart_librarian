@@ -1,16 +1,16 @@
 from openai import APIConnectionError, OpenAI
 
-from app.config import OPENAI_API_KEY, EMBEDDING_MODEL
+from .config import Config
 
 
 class EmbeddingService:
     def __init__(self):
-        self.client = OpenAI(api_key=OPENAI_API_KEY)
+        self.client = OpenAI(api_key=Config.OPENAI_API_KEY)
 
     def create_embedding(self, text: str) -> list[float]:
         try:
             response = self.client.embeddings.create(
-                model=EMBEDDING_MODEL,
+                model=Config.EMBEDDING_MODEL,
                 input=text,
             )
             return response.data[0].embedding
