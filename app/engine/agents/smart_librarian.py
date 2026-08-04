@@ -1,12 +1,15 @@
 import json
 from pathlib import Path
 
-from openai import OpenAI
-
-from app.config import Config
+from app.config import get_settings
 from app.engine.agents.base import BaseAgent
+from app.engine.llm.openai_provider import (
+    OpenAIProvider,
+)
 from app.engine.prompts.loader import PromptLoader
-from app.engine.retrieval.rag_retriever import RAGRetriever
+from app.engine.retrieval.rag_retriever import (
+    RAGRetriever,
+)
 from app.engine.tools.registry import ToolRegistry
 from app.engine.tools.summary_tool import SummaryTool
 
@@ -23,9 +26,8 @@ class SmartLibrarianAgent(BaseAgent):
     name = "smart_librarian"
 
     def __init__(self) -> None:
-        self.client = OpenAI(
-            api_key=Config.OPENAI_API_KEY
-        )
+        self.settings = get_settings()
+        self.provider = OpenAIProvider()
 
         self.retriever = RAGRetriever()
 
@@ -63,7 +65,7 @@ class SmartLibrarianAgent(BaseAgent):
     ) -> str:
         documents = self.retriever.retrieve(
             query=query,
-            n_results=Config.DEFAULT_N_RESULTS,
+            n_results=self.settings.default_n_results,
         )
 
         context = self.build_context(documents)
@@ -87,9 +89,9 @@ User request:
             },
         ]
 
-        response = self.client.chat.completions.create(
-            model=Config.CHAT_MODEL,
-            temperature=Config.TEMPERATURE,
+        response = self.provider.client.chat.completions.create(
+            model=self.settings.chat_model,
+            temperature=self.settings.temperature,
             messages=messages,
             tools=self.registry.schemas(),
             tool_choice="auto",
@@ -123,9 +125,9 @@ User request:
             }
         )
 
-        final_response = self.client.chat.completions.create(
-            model=Config.CHAT_MODEL,
-            temperature=Config.TEMPERATURE,
+        final_response = self.provider.client.chat.completions.create(
+            model=self.settings.chat_model,
+            temperature=self.settings.temperature,
             messages=messages,
         )
 

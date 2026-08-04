@@ -1,5 +1,7 @@
 from app.config import get_settings
-from app.embeddings import EmbeddingService
+from app.services.embedding_service import (
+    EmbeddingService,
+)
 from app.vector_store import VectorStore
 
 
@@ -12,8 +14,14 @@ class RAGRetriever:
     def retrieve(
         self,
         query: str,
-        n_results: int = 3,
+        n_results: int | None = None,
     ):
+        n_results = (
+            n_results
+            if n_results is not None
+            else self.settings.default_n_results
+        )
+
         query_embedding = self.embedding_service.create_embedding(
             query
         )

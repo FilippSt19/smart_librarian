@@ -1,6 +1,8 @@
 from pathlib import Path
 
-from app.embeddings import EmbeddingService
+from app.services.embedding_service import (
+    EmbeddingService,
+)
 from app.vector_store import VectorStore
 
 

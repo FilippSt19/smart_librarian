@@ -11,10 +11,12 @@ st.set_page_config(
     layout="centered",
 )
 
+
 @st.cache_resource
 def get_chatbot():
 
     return SmartLibrarianAgent()
+
 
 chatbot = get_chatbot()
 
