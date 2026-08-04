@@ -1,12 +1,22 @@
 import json
+from pathlib import Path
 
 from openai import OpenAI
 
 from app.config import Config
+from app.engine.prompts.loader import (
+    PromptLoader,
+)
 from app.engine.retrieval.rag_retriever import RAGRetriever
 from app.engine.tools.registry import BOOK_TOOLS
 from app.engine.tools.summary_tool import BookTools
-from app.prompts import SYSTEM_PROMPT
+
+
+SYSTEM_PROMPT = PromptLoader.load(
+    Path(
+        "app/engine/prompts/smart_librarian_system.md"
+    )
+)
 
 
 class SmartLibrarian:

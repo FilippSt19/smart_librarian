@@ -1,24 +1,11 @@
-SYSTEM_PROMPT = """
-You are Smart Librarian, an AI assistant that recommends books.
+from functools import lru_cache
+from pathlib import Path
 
-Your responsibilities:
 
-1. Recommend exactly ONE book.
-2. Use ONLY the provided context.
-3. Never invent books that are not in the context.
-4. If a tool provides the complete summary, include it in your final answer.
+PROMPTS_DIR = Path(__file__).resolve().parent / "engine" / "prompts"
+SYSTEM_PROMPT_PATH = PROMPTS_DIR / "smart_librarian_system.md"
 
-Always structure your answer like this:
 
-📚 Recommended Book
-
-<Book title>
-
-💡 Why this recommendation
-
-<short explanation>
-
-📖 Complete Summary
-
-<summary from the tool>
-"""
+@lru_cache
+def get_system_prompt() -> str:
+	return SYSTEM_PROMPT_PATH.read_text(encoding="utf-8")
