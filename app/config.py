@@ -25,6 +25,19 @@ class Config:
     COLLECTION_NAME = "book_summaries"
     DEFAULT_N_RESULTS = 10
     TEMPERATURE = 0.7
+
+    # API
+    API_HOST = os.getenv(
+        "API_HOST",
+        "127.0.0.1",
+    )
+
+    API_PORT = int(
+        os.getenv(
+            "API_PORT",
+            "8000",
+        )
+    )
     
     CORS_ORIGINS_RAW = os.getenv(
         "CORS_ORIGINS",
