@@ -1,6 +1,5 @@
-# ==========================
+
 # Python
-# ==========================
 __pycache__/
 *.py[cod]
 *.pyo
@@ -42,3 +41,7 @@ dist/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# React
+frontend_react/node_modules/
+frontend_react/dist/
