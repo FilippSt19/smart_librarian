@@ -1,7 +1,9 @@
 from fastapi import APIRouter, HTTPException, status
 
 from app.api.schemas.chat import ChatRequest, ChatResponse
-from app.chatbot import SmartLibrarian
+from app.engine.agents.smart_librarian import (
+    SmartLibrarianAgent,
+)
 
 
 router = APIRouter(
@@ -9,7 +11,7 @@ router = APIRouter(
     tags=["Chat"],
 )
 
-chatbot = SmartLibrarian()
+chatbot = SmartLibrarianAgent()
 
 
 @router.post(

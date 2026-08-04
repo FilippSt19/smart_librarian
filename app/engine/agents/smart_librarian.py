@@ -4,6 +4,7 @@ from pathlib import Path
 from openai import OpenAI
 
 from app.config import Config
+from app.engine.agents.base import BaseAgent
 from app.engine.prompts.loader import PromptLoader
 from app.engine.retrieval.rag_retriever import RAGRetriever
 from app.engine.tools.registry import ToolRegistry
@@ -17,15 +18,11 @@ SYSTEM_PROMPT = PromptLoader.load(
 )
 
 
-class SmartLibrarian:
-    """
-    AI chatbot that recommends books using
-    Retrieval-Augmented Generation (RAG)
-    and OpenAI Function Calling.
-    """
+class SmartLibrarianAgent(BaseAgent):
 
-    def __init__(self):
+    name = "smart_librarian"
 
+    def __init__(self) -> None:
         self.client = OpenAI(
             api_key=Config.OPENAI_API_KEY
         )
@@ -42,14 +39,9 @@ class SmartLibrarian:
         self,
         documents: list[dict],
     ) -> str:
-        """
-        Build a context string from retrieved documents.
-        """
-
         context_parts = []
 
         for document in documents:
-
             context_parts.append(
                 (
                     f"Title: {document['title']}\n"
@@ -59,17 +51,16 @@ class SmartLibrarian:
 
         return "\n\n".join(context_parts)
 
+    def run(
+        self,
+        query: str,
+    ) -> str:
+        return self.chat(query)
+
     def chat(
         self,
         query: str,
     ) -> str:
-        """
-        Generate a recommendation using
-        RAG + Function Calling.
-        """
-        
-        # Retrieve relevant documents
-
         documents = self.retriever.retrieve(
             query=query,
             n_results=Config.DEFAULT_N_RESULTS,
@@ -95,8 +86,6 @@ User request:
 """,
             },
         ]
-        
-        # First LLM Call
 
         response = self.client.chat.completions.create(
             model=Config.CHAT_MODEL,
@@ -108,12 +97,8 @@ User request:
 
         message = response.choices[0].message
 
-        # Normal response
-    
         if not message.tool_calls:
             return message.content or "No response generated."
-        
-        # Tool Calling
 
         tool_call = message.tool_calls[0]
 
@@ -128,12 +113,7 @@ User request:
             arguments,
         )
 
-       
-        # Append assistant message
-       
         messages.append(message)
-        
-        # Append tool result
 
         messages.append(
             {
@@ -143,8 +123,6 @@ User request:
             }
         )
 
-        # Final LLM Call
-        
         final_response = self.client.chat.completions.create(
             model=Config.CHAT_MODEL,
             temperature=Config.TEMPERATURE,
