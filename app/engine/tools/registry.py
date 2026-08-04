@@ -1,4 +1,3 @@
-
 BOOK_TOOLS = [
     {
         "type": "function",

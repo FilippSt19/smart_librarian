@@ -10,7 +10,6 @@ class BookTools:
     """
 
     def __init__(self):
-
         self.settings = get_settings()
         self.summaries_path = Path(
             self.settings.summaries_json_path
@@ -26,7 +25,6 @@ class BookTools:
             "r",
             encoding="utf-8"
         ) as file:
-
             self.book_summaries = json.load(file)
 
     def get_summary_by_title(

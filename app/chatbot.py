@@ -2,36 +2,11 @@ import json
 
 from openai import OpenAI
 
-from app.tests.config.settings import Config
+from app.config import Config
+from app.engine.retrieval.rag_retriever import RAGRetriever
+from app.engine.tools.registry import BOOK_TOOLS
+from app.engine.tools.summary_tool import BookTools
 from app.prompts import SYSTEM_PROMPT
-from app.rag import RAGRetriever
-from app.tools import BookTools
-
-
-BOOK_TOOLS = [
-    {
-        "type": "function",
-        "function": {
-            "name": "get_summary_by_title",
-            "description": (
-                "Returns the complete summary of a book "
-                "based on its exact title."
-            ),
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "title": {
-                        "type": "string",
-                        "description": (
-                            "The exact title of the recommended book."
-                        ),
-                    }
-                },
-                "required": ["title"],
-            },
-        },
-    }
-]
 
 
 class SmartLibrarian:

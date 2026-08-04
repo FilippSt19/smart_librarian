@@ -6,7 +6,7 @@ import chromadb
 # from .config import CHROMA_DB_PATH, COLLECTION_NAME
 
 
-from .tests.config.settings import Config
+from app.config import Config
 class VectorStore:
     """
     Handles all interactions with the ChromaDB vector database.
