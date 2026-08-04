@@ -3,16 +3,17 @@ from typing import Any
 
 
 class BaseTool(ABC):
-    @property
-    @abstractmethod
-    def name(self) -> str:
-        """Unique tool name exposed to callers."""
 
-    @property
-    @abstractmethod
-    def description(self) -> str:
-        """Human-readable tool description."""
+    name: str
+    description: str
 
     @abstractmethod
-    def run(self, **kwargs: Any) -> Any:
-        """Execute the tool using keyword arguments."""
+    def schema(self) -> dict[str, Any]:
+        pass
+
+    @abstractmethod
+    def execute(
+        self,
+        **kwargs: Any,
+    ) -> str:
+        pass

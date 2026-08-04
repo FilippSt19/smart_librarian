@@ -6,8 +6,8 @@ from openai import OpenAI
 from app.config import Config
 from app.engine.prompts.loader import PromptLoader
 from app.engine.retrieval.rag_retriever import RAGRetriever
-from app.engine.tools.registry import BOOK_TOOLS
-from app.engine.tools.summary_tool import BookTools
+from app.engine.tools.registry import ToolRegistry
+from app.engine.tools.summary_tool import SummaryTool
 
 
 SYSTEM_PROMPT = PromptLoader.load(
@@ -32,7 +32,11 @@ class SmartLibrarian:
 
         self.retriever = RAGRetriever()
 
-        self.tools = BookTools()
+        self.registry = ToolRegistry(
+            [
+                SummaryTool(),
+            ]
+        )
 
     def build_context(
         self,
@@ -98,7 +102,7 @@ User request:
             model=Config.CHAT_MODEL,
             temperature=Config.TEMPERATURE,
             messages=messages,
-            tools=BOOK_TOOLS,
+            tools=self.registry.schemas(),
             tool_choice="auto",
         )
 
@@ -119,19 +123,10 @@ User request:
             tool_call.function.arguments
         )
 
-        tool_functions = {
-            "get_summary_by_title":
-                self.tools.get_summary_by_title,
-        }
-
-        if function_name not in tool_functions:
-            raise ValueError(
-                f"Unsupported tool: {function_name}"
-            )
-
-        tool_result = tool_functions[
-            function_name
-        ](**arguments)
+        tool_result = self.registry.execute(
+            function_name,
+            arguments,
+        )
 
        
         # Append assistant message
