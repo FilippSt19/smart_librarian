@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.schemas import ChatRequest, ChatResponse
-from app.chatbot import SmartLibrarian
+from api.routes.chat import router as chat_router
+from api.routes.health import router as health_router
 
 app = FastAPI(
     title="Smart Librarian API",
@@ -10,7 +10,6 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# CORS
 origins = [
     "http://localhost:5173",
 ]
@@ -23,24 +22,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-chatbot = SmartLibrarian()
-
-
-@app.get("/")
-def root():
-    return {
-        "message": "Smart Librarian API is running!"
-    }
-
-
-@app.post(
-    "/chat",
-    response_model=ChatResponse,
-)
-def chat(request: ChatRequest):
-
-    response = chatbot.chat(request.query)
-
-    return ChatResponse(
-        response=response
-    )
+app.include_router(chat_router)
+app.include_router(health_router)

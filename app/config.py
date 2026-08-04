@@ -24,4 +24,15 @@ class Config:
     CHROMA_DB_PATH = "data/chroma_db"
     COLLECTION_NAME = "book_summaries"
     DEFAULT_N_RESULTS = 10
-    TEMPERATURE=0.7
+    TEMPERATURE = 0.7
+    
+    CORS_ORIGINS_RAW = os.getenv(
+        "CORS_ORIGINS",
+        "http://localhost:5173"
+    )
+    
+    CORS_ORIGINS = [
+        origin.strip()
+        for origin in CORS_ORIGINS_RAW.split(";")
+        if origin.strip()
+    ]
