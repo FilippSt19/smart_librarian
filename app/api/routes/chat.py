@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 
-from api.schemas.chat import ChatRequest, ChatResponse
+from app.api.schemas.chat import ChatRequest, ChatResponse
 from app.chatbot import SmartLibrarian
 
 
@@ -16,22 +16,13 @@ chatbot = SmartLibrarian()
     "",
     response_model=ChatResponse,
 )
-def chat(
-    request: ChatRequest,
-) -> ChatResponse:
-
+def chat(request: ChatRequest) -> ChatResponse:
     try:
+        response = chatbot.chat(request.query)
 
-        response = chatbot.chat(
-            request.query
-        )
-
-        return ChatResponse(
-            response=response
-        )
+        return ChatResponse(response=response)
 
     except Exception as exc:
-
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to generate recommendation.",
