@@ -1,23 +1,22 @@
-from openai import APIConnectionError, OpenAI
+from openai import OpenAI
 
-from .config import Config
+from app.config import get_settings
 
 
 class EmbeddingService:
-    def __init__(self):
-        self.client = OpenAI(api_key=Config.OPENAI_API_KEY)
+    def __init__(self) -> None:
+        self.settings = get_settings()
+        self.client = OpenAI(
+            api_key=self.settings.openai_api_key
+        )
 
-    def create_embedding(self, text: str) -> list[float]:
-        try:
-            response = self.client.embeddings.create(
-                model=Config.EMBEDDING_MODEL,
-                input=text,
-            )
-            return response.data[0].embedding
+    def create_embedding(
+        self,
+        text: str,
+    ) -> list[float]:
+        response = self.client.embeddings.create(
+            model=self.settings.embedding_model,
+            input=text,
+        )
 
-        except APIConnectionError as exc:
-            raise RuntimeError(
-                "Nu s-a putut realiza conexiunea la OpenAI. "
-                "Verifică DNS-ul, VPN-ul, proxy-ul și firewall-ul."
-            ) from exc
-            
+        return response.data[0].embedding

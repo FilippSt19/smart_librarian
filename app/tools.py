@@ -1,8 +1,7 @@
 import json
 from pathlib import Path
 
-
-SUMMARIES_PATH = Path("data/summaries.json")
+from app.config import get_settings
 
 
 class BookTools:
@@ -12,13 +11,18 @@ class BookTools:
 
     def __init__(self):
 
-        if not SUMMARIES_PATH.exists():
+        self.settings = get_settings()
+        self.summaries_path = Path(
+            self.settings.summaries_json_path
+        )
+
+        if not self.summaries_path.exists():
             raise FileNotFoundError(
-                f"{SUMMARIES_PATH} not found."
+                f"{self.summaries_path} not found."
             )
 
         with open(
-            SUMMARIES_PATH,
+            self.summaries_path,
             "r",
             encoding="utf-8"
         ) as file:

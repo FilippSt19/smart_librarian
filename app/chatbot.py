@@ -2,7 +2,7 @@ import json
 
 from openai import OpenAI
 
-from app.config import Config
+from app.tests.config.settings import Config
 from app.prompts import SYSTEM_PROMPT
 from app.rag import RAGRetriever
 from app.tools import BookTools

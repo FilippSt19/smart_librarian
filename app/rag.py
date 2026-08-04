@@ -1,5 +1,6 @@
 from app.embeddings import EmbeddingService
 from app.vector_store import VectorStore
+from app.config import get_settings
 
 
 class RAGRetriever:
@@ -9,6 +10,8 @@ class RAGRetriever:
         self.embedding_service = EmbeddingService()
 
         self.vector_store = VectorStore()
+
+        self.settings = get_settings()
 
     def retrieve(
         self,
