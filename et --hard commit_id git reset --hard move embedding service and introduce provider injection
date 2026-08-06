@@ -1,0 +1,44 @@
+[33m5118911[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m split python dependencies and add docker dev setup
+[33m43fdd43[m chore: remove stray app init typo file
+[33m2a45fd8[m refactor: centralize rag n_results in settings
+[33mb8a38a3[m refactor: inject settings into embedding service
+[33m9f322a5[m Move embedding service and introduce provider injection
+[33m220ad97[m Move chatbot into engine agent layer
+[33m706bbdf[m Introduce tool registry and base tool abstraction
+[33m115f9c9[m Move system prompt to markdown template
+[33mcad27d1[m Move system prompt into markdown template
+[33mfad658a[m Refactor retrieval and tools into engine layer
+[33mef44b94[m Introduce shared utilities and custom exceptions
+[33m14425c4[m Replace legacy configuration with typed settings
+[33mcc9726d[m Introduce environment-based application settings
+[33m379f061[m Integrate FastAPI package into application
+[33mc9f006a[m Extract API middleware configuration
+[33m9fd3c64[m Refactor FastAPI routes and schemas
+[33m3bec484[m Clean repository structure
+[33m465ffc3[m Clean misplaced frontend dependencies
+[33m22f3b15[m Improve chat experience with auto scroll and loading state
+[33m614d6be[m Build React chat interface and connect FastAPI backend
+[33me105b5e[m Build React chat interface
+[33me1a1e13[m Build React layout components
+[33m77bd532[m Initialize React frontend with Vite
+[33me3451eb[m Add chat window component
+[33m416798b[m Add reusable chat message component
+[33m4d2d5f5[m Clean React template and prepare frontend structure
+[33m43a7986[m Initialize React frontend structure
+[33m00e3376[m Initialize React frontend with Vite
+[33m731fb59[m Expose chat endpoint through FastAPI
+[33m03234dd[m Initialize FastAPI backend
+[33m1b9a687[m Add professional project documentation
+[33m297106a[m Refactor project structure
+[33m5758e1c[m Improve Streamlit interface and extract prompts
+[33m2be42a8[m Add Streamlit user interface
+[33m3930837[m Implement OpenAI function calling for book summaries
+[33mcbfea49[m Refactor application configuration into Config class
+[33m1fa1686[m Add local summaries dataset for tool calling
+[33m551e3ef[m Implement GPT chatbot with RAG retrieval
+[33ma0470cd[m Implement semantic retrieval with ChromaDB
+[33m9724160[m Implement book ingestion pipeline with ChromaDB
+[33mbac9167[m Implement embedding service and validate OpenAI integration
+[33maeafe24[m Implement configuration and embedding service
+[33m89a46a7[m Add project dependencies
+[33m775a044[m Initial project structure

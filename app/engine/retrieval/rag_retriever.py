@@ -2,13 +2,13 @@ from app.config import get_settings
 from app.services.embedding_service import (
     EmbeddingService,
 )
-from app.vector_store import VectorStore
+from app.repositories import ChromaBookRepository
 
 
 class RAGRetriever:
     def __init__(self):
         self.embedding_service = EmbeddingService()
-        self.vector_store = VectorStore()
+        self.repository = ChromaBookRepository()
         self.settings = get_settings()
 
     def retrieve(
@@ -26,7 +26,7 @@ class RAGRetriever:
             query
         )
 
-        results = self.vector_store.search(
+        results = self.repository.search(
             embedding=query_embedding,
             n_results=n_results,
         )

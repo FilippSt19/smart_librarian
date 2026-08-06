@@ -3,7 +3,7 @@ from pathlib import Path
 from app.services.embedding_service import (
     EmbeddingService,
 )
-from app.vector_store import VectorStore
+from app.repositories import ChromaBookRepository
 
 
 BOOKS_PATH = Path("data/book_summaries.txt")
@@ -32,7 +32,7 @@ def main():
     books = load_books()
 
     embedding_service = EmbeddingService()
-    vector_store = VectorStore()
+    repository = ChromaBookRepository()
 
     print(f"Found {len(books)} books.\n")
 
@@ -42,7 +42,7 @@ def main():
 
         embedding = embedding_service.create_embedding(book)
 
-        vector_store.add_document(
+        repository.add_document(
             document_id=f"book_{index + 1}",
             document=book,
             embedding=embedding,
@@ -56,7 +56,7 @@ def main():
     print("\nIndexing completed successfully!")
     print(
         f"Total documents in ChromaDB: "
-        f"{vector_store.count_documents()}"
+        f"{repository.count_documents()}"
     )
 
 
