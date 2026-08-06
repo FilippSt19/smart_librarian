@@ -1,0 +1,61 @@
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+
+    container_name: smart-librarian-api
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./app:/app/app
+      - ./data:/app/data
+
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend_react
+
+    container_name: smart-librarian-frontend
+
+    ports:
+      - "5173:5173"
+
+    volumes:
+      - ./frontend_react:/app
+      - /app/node_modules
+
+    depends_on:
+      - api
+
+    restart: unless-stopped
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: frontend_streamlit/Dockerfile
+
+    container_name: smart-librarian-streamlit
+
+    ports:
+      - "8501:8501"
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./app:/app/app
+      - ./frontend_streamlit:/app/frontend_streamlit
+      - ./data:/app/data
+
+    depends_on:
+      - api
+
+    restart: unless-stopped
