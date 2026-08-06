@@ -3,7 +3,9 @@ import traceback
 from fastapi import APIRouter, HTTPException, status
 
 from app.api.schemas.chat import ChatRequest, ChatResponse
-from app.services.recommendation_service import RecommendationService
+from app.engine.agents.factory import (
+    AgentFactory,
+)
 
 
 router = APIRouter(
@@ -11,7 +13,7 @@ router = APIRouter(
     tags=["Chat"],
 )
 
-recommendation_service = RecommendationService()
+agent = AgentFactory.create()
 
 
 @router.post(
@@ -22,7 +24,7 @@ def chat(
     request: ChatRequest,
 ) -> ChatResponse:
     try:
-        response = recommendation_service.recommend(
+        response = agent.chat(
             request.query
         )
 

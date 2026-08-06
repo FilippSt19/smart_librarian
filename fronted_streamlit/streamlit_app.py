@@ -1,7 +1,7 @@
 import streamlit as st
 
-from app.engine.agents.smart_librarian import (
-    SmartLibrarianAgent,
+from app.engine.agents.factory import (
+    AgentFactory,
 )
 
 
@@ -15,7 +15,7 @@ st.set_page_config(
 @st.cache_resource
 def get_chatbot():
 
-    return SmartLibrarianAgent()
+    return AgentFactory.create()
 
 
 chatbot = get_chatbot()
