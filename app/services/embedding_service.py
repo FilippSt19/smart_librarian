@@ -1,15 +1,21 @@
-from app.config import get_settings
-from app.engine.llm.openai_provider import (
-    OpenAIProvider,
-)
+from app.config import Settings, get_settings
+from app.engine.llm.openai_provider import OpenAIProvider
 
 
 class EmbeddingService:
+
     def __init__(
         self,
         provider: OpenAIProvider | None = None,
-    ):
-        self.settings = get_settings()
+        settings: Settings | None = None,
+    ) -> None:
+
+        self.settings = (
+            settings
+            if settings is not None
+            else get_settings()
+        )
+
         self.provider = (
             provider
             if provider is not None
