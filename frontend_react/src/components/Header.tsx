@@ -11,12 +11,29 @@ export default function Header({
 }: HeaderProps) {
 
     return (
+
         <header className="header">
 
-            <h1>{title}</h1>
+            <div className="header__badge">
 
-            <p>{subtitle}</p>
+                AI Book Assistant
+
+            </div>
+
+            <h1 className="header__title">
+
+                {title}
+
+            </h1>
+
+            <p className="header__subtitle">
+
+                {subtitle}
+
+            </p>
 
         </header>
+
     );
+
 }

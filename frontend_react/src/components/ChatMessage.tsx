@@ -1,5 +1,6 @@
 import "../styles/chat.css";
 import ReactMarkdown from "react-markdown";
+import { FaRobot } from "react-icons/fa";
 
 type ChatMessageProps = {
     role: "user" | "assistant";
@@ -14,6 +15,7 @@ export default function ChatMessage({
     const isUser = role === "user";
 
     return (
+
         <div
             className={
                 isUser
@@ -21,11 +23,24 @@ export default function ChatMessage({
                     : "message message-assistant"
             }
         >
+
+            {!isUser && (
+
+                <div className="message-avatar assistant-avatar">
+
+                    <FaRobot />
+
+                </div>
+
+            )}
+
             <div className="message-bubble">
 
                 <div className="message-role">
 
-                    {isUser ? "🧑 You" : "📚 Assistant"}
+                    {isUser
+                        ? "You"
+                        : "Smart Librarian"}
 
                 </div>
 
@@ -38,6 +53,11 @@ export default function ChatMessage({
                 </div>
 
             </div>
+
+
+
         </div>
+
     );
+
 }

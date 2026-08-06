@@ -6,6 +6,7 @@ import ChatWindow from "./components/ChatWindow";
 import ChatInput from "./components/ChatInput";
 
 import { sendMessage } from "./services/api";
+import "./styles/app.css";
 
 import type { ChatMessage } from "./types/chat";
 
@@ -79,25 +80,37 @@ function App() {
     }
 
     return (
-        <>
-
+        <div className="app-shell">
             <Navbar />
 
-            <Header
-                title="📚 Smart Librarian"
-                subtitle="Discover your next favorite book using AI."
-            />
+            <main className="main-content">
+                <div className="content-wrapper">
+                    <Header
+                        title="What would you like to read today?"
+                        subtitle="Describe your favorite genres, authors or themes and I'll recommend the perfect book."
+                    />
 
-            <ChatWindow
-                messages={messages}
-                loading={loading}
-            />
+                    <section className="chat-section">
+                        <div className="chat-card">
 
-            <ChatInput
-                onSend={handleSend}
-            />
+                            <ChatWindow
+                                messages={messages}
+                                loading={loading}
+                            />
 
-        </>
+                            <div className="chat-card__footer">
+
+                                <ChatInput
+                                    onSend={handleSend}
+                                />
+
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
     );
 }
 

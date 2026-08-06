@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaPaperPlane } from "react-icons/fa";
 
 type Props = {
     onSend: (message: string) => void;
@@ -33,17 +34,28 @@ export default function ChatInput({
                     setText(e.target.value)
                 }
 
-                placeholder="Ask for a book recommendation..."
+                onKeyDown={(e) => {
+
+                    if (e.key === "Enter") {
+
+                        handleSend();
+
+                    }
+
+                }}
+
+                placeholder="Describe the book you are looking for..."
 
             />
 
             <button onClick={handleSend}>
 
-                Send
+                <FaPaperPlane />
 
             </button>
 
         </div>
 
     );
+
 }
