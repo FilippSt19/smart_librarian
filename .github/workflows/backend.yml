@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      OPENAI_API_KEY: "test-key"
+      OPENAI_API_KEY: test-key
 
     steps:
 
@@ -32,6 +32,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r app/requirements-dev.txt
 
-      - name: Run unit tests
+      - name: Run tests
         run: |
-          python -m pytest app/tests/unit
+          python -m pytest app/tests
