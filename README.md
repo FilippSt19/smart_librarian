@@ -1,297 +1,274 @@
-# 📚 Smart Librarian
+# Smart Librarian
 
-An AI-powered book recommendation system built with **Python**, **OpenAI GPT**, **RAG (Retrieval-Augmented Generation)** and **ChromaDB**.
+Smart Librarian is an AI-powered book recommendation platform built with FastAPI, React and Streamlit.
 
-The application recommends books based on the user's interests using semantic search and enriches the recommendation with a complete book summary through **OpenAI Function Calling**.
-
----
-
-# 🚀 Features
-
-- 📚 AI book recommendations
-- 🔍 Semantic search using ChromaDB
-- 🧠 OpenAI Embeddings (`text-embedding-3-small`)
-- 🤖 OpenAI GPT (`gpt-4.1-mini`)
-- ⚡ Retrieval-Augmented Generation (RAG)
-- 🛠 OpenAI Function Calling
-- 📖 Local JSON knowledge base
-- 💬 Streamlit chat interface
+The application combines Retrieval-Augmented Generation (RAG), semantic search using ChromaDB and OpenAI models to recommend books from natural language queries.
 
 ---
 
-# 🏗 Architecture
+## Features
 
-```
-User
- │
- ▼
-Streamlit UI
- │
- ▼
-SmartLibrarian
- │
- ├───────────────┐
- │               │
- ▼               ▼
-RAG          Function Calling
- │               │
- ▼               ▼
-ChromaDB    summaries.json
- │
- ▼
-OpenAI Embeddings
- │
- ▼
-OpenAI GPT
-```
+- AI-powered book recommendations
+- Retrieval-Augmented Generation (RAG)
+- Semantic search with ChromaDB
+- OpenAI Function Calling
+- FastAPI REST API
+- React frontend
+- Streamlit frontend
+- Repository Pattern
+- Service Layer
+- Dependency Injection
+- Docker and Docker Compose support
+- GitHub Actions CI
+- Unit and integration tests
 
 ---
 
-# 📂 Project Structure
-
-```
-smart_librarian_project/
-
-│
-├── app/
-│   ├── chatbot.py
-│   ├── config.py
-│   ├── embeddings.py
-│   ├── prompts.py
-│   ├── rag.py
-│   ├── tools.py
-│   └── vector_store.py
-│
-├── data/
-│   ├── book_summaries.txt
-│   ├── summaries.json
-│   └── chroma_db/
-│
-├── scripts/
-│   └── ingest_books.py
-│
-├── ui/
-│   └── streamlit_app.py
-│
-├── requirements.txt
-├── README.md
-└── .env
-```
-
----
-
-# ⚙️ Technologies
-
-- Python 3.13
-- OpenAI API
-- GPT-4.1-mini
-- text-embedding-3-small
-- ChromaDB
-- Streamlit
-- python-dotenv
-
----
-
-# 🔄 Application Flow
-
-## 1. Data Ingestion
-
-```
-book_summaries.txt
-
-↓
-
-OpenAI Embeddings
-
-↓
-
-ChromaDB
-```
-
-The ingestion pipeline reads all book summaries, generates embeddings and stores them in ChromaDB.
-
----
-
-## 2. Retrieval
-
-```
-User Query
-
-↓
-
-Embedding
-
-↓
-
-ChromaDB
-
-↓
-
-Top 3 Relevant Books
-```
-
-The system performs semantic search instead of keyword matching.
-
----
-
-## 3. Generation
-
-```
-Retrieved Context
-
-↓
-
-GPT
-
-↓
-
-Book Recommendation
-```
-
-GPT recommends exactly one book using the retrieved context.
-
----
-
-## 4. Function Calling
-
-```
-GPT
-
-↓
-
-get_summary_by_title()
-
-↓
-
-summaries.json
-
-↓
-
-Complete Summary
-
-↓
-
-Final Response
-```
-
-After recommending a book, GPT automatically calls a local Python tool to retrieve the complete summary.
-
----
-
-# 📸 Streamlit Interface
-
-The Streamlit interface allows users to:
-
-- Ask for recommendations
-- Receive AI-generated responses
-- Keep conversation history
-- Explore example prompts
-
----
-
-# 📦 Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/smart_librarian.git
-
-cd smart_librarian
-```
-
-Create a virtual environment
-
-```bash
-python -m venv .venv
-```
-
-Activate the environment
-
-Windows
-
-```bash
-.\.venv\Scripts\activate
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-# 🔑 Environment Variables
-
-Create a `.env` file.
+## Project Structure
 
 ```text
-OPENAI_API_KEY=your_api_key
+smart_librarian_project/
+
+├── app/
+│   ├── api/
+│   ├── common/
+│   ├── config/
+│   ├── engine/
+│   ├── repositories/
+│   ├── scripts/
+│   ├── services/
+│   └── tests/
+│
+├── frontend_react/
+│
+├── frontend_streamlit/
+│
+├── data/
+│
+├── compose.yaml
+│
+└── README.md
 ```
 
 ---
 
-# ▶️ Run the ingestion pipeline
+## Technology Stack
 
-```bash
-python -m scripts.ingest_books
-```
+### Backend
 
----
-
-# ▶️ Run Streamlit
-
-```bash
-streamlit run ui/streamlit_app.py
-```
-
----
-
-# 💬 Example Questions
-
-- I want a fantasy book about friendship.
-- Recommend a romance novel.
-- Suggest a dystopian novel.
-- I love war stories.
-- Recommend a science fiction novel.
-- Give me something similar to Harry Potter.
-
----
-
-# 🧠 What I Learned
-
-During this project I implemented:
-
-- Retrieval-Augmented Generation (RAG)
-- Semantic Search
-- Vector Databases
-- OpenAI Embeddings
-- OpenAI Function Calling
+- Python 3.13
+- FastAPI
+- OpenAI API
 - ChromaDB
+- Pydantic
+- Uvicorn
+
+### Frontend
+
+React
+
+- React
+- TypeScript
+- Vite
+- Axios
+
+Streamlit
+
 - Streamlit
-- Project architecture and modular design
-- Configuration management
-- Git workflow with incremental commits
+
+### DevOps
+
+- Docker
+- Docker Compose
+- Rancher Desktop
+- nerdctl
+- GitHub Actions
 
 ---
 
-# 🔮 Future Improvements
+## Running the Application
 
-- ✅ FastAPI Backend
-- ✅ React Frontend
-- ✅ GitHub Actions
-- ✅ Docker Support
-- ✅ Voice Mode (Speech-to-Text)
-- ✅ Text-to-Speech
-- ✅ AI Image Generation
-- ✅ Content Moderation
+### Recommended
+
+The recommended way to run the project is with Docker Compose.
+
+Build the containers:
+
+```bash
+nerdctl compose build
+```
+
+Start the complete application:
+
+```bash
+nerdctl compose up
+```
+
+This starts:
+
+- FastAPI backend
+- React frontend
+- Streamlit frontend
+
+Default URLs:
+
+| Service | URL |
+|---------|-----|
+| React | http://localhost:5173 |
+| Streamlit | http://localhost:8501 |
+| Swagger | http://localhost:8000/docs |
 
 ---
 
-# 👨‍💻 Author
+## Local Development
 
-Filip Stanciu
+### Backend
 
-Junior Data Engineer / AI Engineer
+```bash
+python -m uvicorn app.api.main:app --reload
+```
 
-Endava
+Swagger
+
+```text
+http://localhost:8000/docs
+```
+
+---
+
+### React Frontend
+
+```bash
+cd frontend_react
+
+npm install
+
+npm run dev
+```
+
+Open
+
+```text
+http://localhost:5173
+```
+
+---
+
+### Streamlit Frontend
+
+```bash
+streamlit run frontend_streamlit/streamlit_app.py
+```
+
+Open
+
+```text
+http://localhost:8501
+```
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/api/v1/health` | Health check |
+| POST | `/api/v1/chat` | Book recommendations |
+| POST | `/api/v1/ingestion/books` | Book ingestion |
+
+---
+
+## Running Tests
+
+Run all tests
+
+```bash
+python -m pytest app/tests
+```
+
+Run unit tests
+
+```bash
+python -m pytest app/tests/unit
+```
+
+Run integration tests
+
+```bash
+python -m pytest app/tests/integration
+```
+
+---
+
+## Continuous Integration
+
+GitHub Actions automatically executes:
+
+- Backend CI
+- Frontend CI
+
+on every push and pull request to the `main` branch.
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the project root.
+
+Required variable:
+
+```text
+OPENAI_API_KEY=your_openai_api_key
+```
+
+Example configuration:
+
+```text
+CHAT_MODEL=gpt-4.1-mini
+EMBEDDING_MODEL=text-embedding-3-small
+DEFAULT_N_RESULTS=3
+CHROMA_DB_PATH=data/chroma_db
+COLLECTION_NAME=book_summaries
+```
+
+---
+
+## Architecture
+
+The backend follows a layered architecture:
+
+```text
+API
+        │
+        ▼
+Services
+        │
+        ▼
+Engine
+        │
+        ├── Agents
+        ├── Chains
+        ├── Retrieval
+        ├── LLM
+        └── Tools
+        │
+        ▼
+Repositories
+        │
+        ▼
+ChromaDB
+```
+
+The project uses:
+
+- Repository Pattern
+- Service Layer
+- Factory Pattern
+- Dependency Injection
+- Retrieval-Augmented Generation (RAG)
+
+---
+
+## License
+
+This project was developed for educational purposes.
