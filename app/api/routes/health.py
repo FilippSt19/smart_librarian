@@ -1,15 +1,17 @@
 from fastapi import APIRouter
 
-router = APIRouter(
-    prefix="/health",
-    tags=["Health"],
-)
+router = APIRouter(tags=["Health"])
 
 
-@router.get("")
-def health():
-
+@router.get("/")
+def root() -> dict[str, str]:
     return {
-        "status": "ok",
-        "service": "smart-librarian-api",
+        "message": "Smart Librarian API is running"
+    }
+
+
+@router.get("/health")
+def health() -> dict[str, str]:
+    return {
+        "status": "ok"
     }
