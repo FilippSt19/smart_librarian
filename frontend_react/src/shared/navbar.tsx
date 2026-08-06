@@ -6,37 +6,39 @@ import "../styles/navbar.css";
 export default function Navbar() {
 
     return (
-        <nav className="navbar">
 
-            <div className="navbar__left">
+    <nav className="navbar">
 
-                <div className="navbar__icon">
-                    <FaBookOpen />
-                </div>
+        <div className="navbar__left">
 
-                <div>
+            <div className="navbar__icon">
+                <FaBookOpen />
+            </div>
 
-                    <h1 className="navbar__title">
-                        Smart Librarian
-                    </h1>
+            <div>
 
-                    <span className="navbar__subtitle">
-                        AI Book Recommendation Platform
-                    </span>
+                <h1 className="navbar__title">
+                    Smart Librarian
+                </h1>
 
-                </div>
+                <span className="navbar__subtitle">
+                    AI Book Recommendation Platform
+                </span>
 
             </div>
 
-            <div className="navbar__badge">
+        </div>
 
-                <BsStars />
+        <div className="navbar__badge">
 
-                <span>Powered by OpenAI</span>
+            <BsStars />
 
-            </div>
+            <span>Powered by OpenAI</span>
 
-        </nav>
-    );
+        </div>
+
+    </nav>
+
+);
 
 }
