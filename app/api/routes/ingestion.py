@@ -1,10 +1,8 @@
 from pathlib import Path
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 
-from app.services.ingestion_service import (
-    IngestionService,
-)
+from app.services.ingestion_service import IngestionService
 
 
 router = APIRouter(
@@ -13,18 +11,29 @@ router = APIRouter(
 )
 
 
-@router.post("/books")
+@router.post(
+    "/books",
+    status_code=status.HTTP_200_OK,
+)
 def ingest_books():
 
-    service = IngestionService()
+    try:
 
-    service.ingest(
-        Path(
-            "data/book_summaries.txt"
+        service = IngestionService()
+
+        service.ingest(
+            Path(
+                "data/book_summaries.txt"
+            )
         )
-    )
 
-    return {
-        "message":
-        "Books ingested successfully."
-    }
+        return {
+            "message": "Books ingested successfully."
+        }
+
+    except Exception as exc:
+
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(exc),
+        ) from exc
