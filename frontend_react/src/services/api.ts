@@ -18,7 +18,7 @@ export async function sendMessage(
     };
 
     const response = await api.post<ChatResponse>(
-        "/chat",
+        "/api/v1/chat",
         request,
     );
 
