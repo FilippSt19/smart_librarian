@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
 
 from app.api.schemas.chat import ChatRequest, ChatResponse
-from app.engine.agents.smart_librarian import (
-    SmartLibrarianAgent,
+from app.services.recommendation_service import (
+    RecommendationService,
 )
 
 
@@ -11,7 +11,7 @@ router = APIRouter(
     tags=["Chat"],
 )
 
-chatbot = SmartLibrarianAgent()
+recommendation_service = RecommendationService()
 
 
 @router.post(
@@ -20,7 +20,9 @@ chatbot = SmartLibrarianAgent()
 )
 def chat(request: ChatRequest) -> ChatResponse:
     try:
-        response = chatbot.chat(request.query)
+        response = recommendation_service.recommend(
+            request.query
+        )
 
         return ChatResponse(response=response)
 
