@@ -59,3 +59,22 @@
     line-height:1.8;
 
 }
+
+/* Mobile */
+@media (max-width: 479px) {
+    .header { margin: 12px auto 16px; }
+    .header__title { font-size: 32px; letter-spacing: -1px; }
+    .header__subtitle { font-size: 14px; margin-top: 12px; }
+}
+
+/* Tablet */
+@media (min-width: 480px) and (max-width: 768px) {
+    .header__title { font-size: 44px; letter-spacing: -2px; }
+    .header__subtitle { font-size: 15px; }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+    .header__title { font-size: 64px; }
+    .header__subtitle { font-size: 17px; }
+}

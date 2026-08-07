@@ -74,3 +74,29 @@
     background:rgba(255,255,255,.75);
 
 }
+
+/* Mobile: < 480px */
+@media (max-width: 479px) {
+    .app-shell {
+        background:
+            radial-gradient(circle at top right, rgba(124,58,237,.08), transparent 40%),
+            linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 100%);
+    }
+    .main-content { padding: 0 16px 24px; }
+    .content-wrapper { gap: 16px; }
+    .chat-section { gap: 12px; }
+    .chat-card { border-radius: 20px; }
+    .chat-card__footer { padding: 16px; }
+}
+
+/* Tablet: 480px - 768px */
+@media (min-width: 480px) and (max-width: 768px) {
+    .main-content { padding: 0 24px 32px; }
+    .chat-card { border-radius: 24px; }
+}
+
+/* Desktop: > 1024px */
+@media (min-width: 1025px) {
+    .main-content { padding: 0 32px 40px; }
+}
+
