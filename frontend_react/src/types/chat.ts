@@ -20,6 +20,15 @@ export type ChatMessage = {
 };
 
 
+export type Conversation = {
+    id: string;
+    title: string;
+    createdAt: string;
+    updatedAt: string;
+    messages: ChatMessage[];
+};
+
+
 export type ChatRequest = {
     query: string;
 };

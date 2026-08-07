@@ -59,6 +59,17 @@
     gap: 24px;
 }
 
+.workspace {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+
+    align-items: start;
+
+    gap: 20px;
+}
+
 .chat-section {
     display: flex;
     flex-direction: column;
@@ -119,7 +130,7 @@
     }
 
     .content-wrapper {
-        gap: 16px;
+        gap: 18px;
     }
 
     .chat-section {
@@ -132,6 +143,12 @@
 
     .chat-card__footer {
         padding: 16px;
+    }
+
+    .workspace {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
     }
 }
 
@@ -147,10 +164,20 @@
     .chat-card {
         border-radius: 24px;
     }
+
+    .workspace {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
 }
 
 @media (min-width: 1025px) {
     .main-content {
-        padding: 0 32px 40px;
+        padding: 0 32px 28px;
+    }
+
+    .content-wrapper {
+        gap: 18px;
     }
 }

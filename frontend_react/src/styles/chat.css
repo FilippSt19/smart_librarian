@@ -522,10 +522,10 @@
 /* Desktop */
 @media (min-width: 1025px) {
     .chat-window {
-        min-height: 470px;
-        max-height: 470px;
+        min-height: 430px;
+        max-height: 430px;
 
-        padding: 30px;
+        padding: 24px 28px;
     }
 
     .message-bubble {

@@ -104,11 +104,20 @@
 
 /* Desktop */
 @media (min-width: 1025px) {
+    .header {
+        margin: 4px auto 12px;
+    }
+
     .header__title {
-        font-size: 64px;
+        font-size: clamp(46px, 3.6vw, 58px);
+
+        letter-spacing: -2.5px;
     }
 
     .header__subtitle {
-        font-size: 17px;
+        margin-top: 6px;
+
+        font-size: 16px;
+        line-height: 1.6;
     }
 }
