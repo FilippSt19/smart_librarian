@@ -101,7 +101,7 @@ function App() {
 
                     <Header
                         title="What would you like to read today?"
-                        subtitle="Describe your favorite genres, authors or themes and Smart Librarian will recommend the perfect book."
+                        subtitle="Describe your favorite genres, authors or themes for the perfect book recommendation.."
                     />
 
                     <div className="chat-card">
