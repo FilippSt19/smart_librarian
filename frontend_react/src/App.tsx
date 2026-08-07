@@ -109,6 +109,7 @@ function App() {
                         <ChatWindow
                             messages={messages}
                             loading={loading}
+                            onSend={handleSend}
                         />
 
                         <div className="chat-card__footer">
