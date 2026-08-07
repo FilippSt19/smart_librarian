@@ -1,40 +1,32 @@
 .app-shell {
     min-height: 100vh;
+
     display: flex;
     flex-direction: column;
 
     background:
-        /* glow mov - stânga sus */
         radial-gradient(
             ellipse at 0% 18%,
             rgba(99, 102, 241, 0.13) 0%,
             rgba(139, 92, 246, 0.07) 28%,
             transparent 52%
         ),
-
-        /* glow albastru/mov - dreapta sus */
         radial-gradient(
             ellipse at 100% 5%,
             rgba(129, 140, 248, 0.12) 0%,
             transparent 45%
         ),
-
-        /* zona mov din dreapta jos */
         radial-gradient(
             ellipse at 100% 85%,
             rgba(139, 92, 246, 0.13) 0%,
             rgba(165, 180, 252, 0.08) 30%,
             transparent 58%
         ),
-
-        /* glow foarte subtil jos */
         radial-gradient(
             ellipse at 45% 100%,
             rgba(99, 102, 241, 0.07) 0%,
             transparent 50%
         ),
-
-        /* baza */
         linear-gradient(
             135deg,
             #f8faff 0%,
@@ -46,83 +38,119 @@
     background-attachment: fixed;
 }
 
-.main-content{
+.main-content {
+    flex: 1;
 
-    flex:1;
+    width: 100%;
 
-    width:100%;
+    padding: 0 32px 40px;
 
-    padding:0 32px 40px;
-
+    box-sizing: border-box;
 }
 
 .content-wrapper {
     width: min(1300px, 100%);
+
     margin: 0 auto;
+
     display: flex;
     flex-direction: column;
+
     gap: 24px;
 }
 
 .chat-section {
     display: flex;
     flex-direction: column;
+
     gap: 16px;
 }
 
-.chat-card{
+.chat-card {
+    width: min(1180px, 100%);
 
-    width:min(1180px,100%);
+    margin: 0 auto;
 
-    margin:0 auto;
+    background: rgba(255, 255, 255, 0.9);
 
-    background:rgba(255,255,255,.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
-    backdrop-filter:blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 32px;
 
-    border-radius:32px;
-
-    border:1px solid rgba(255,255,255,.7);
-
-    overflow:hidden;
+    overflow: hidden;
 
     box-shadow:
-        0 25px 70px rgba(15,23,42,.08);
+        0 25px 70px rgba(15, 23, 42, 0.08);
 
+    box-sizing: border-box;
 }
 
-.chat-card__footer{
+.chat-card__footer {
+    padding: 24px;
 
-    padding:24px;
+    background: rgba(255, 255, 255, 0.75);
 
-    border-top:1px solid #E5E7EB;
+    border-top: 1px solid #e5e7eb;
 
-    background:rgba(255,255,255,.75);
-
+    box-sizing: border-box;
 }
 
-/* Mobile: < 480px */
 @media (max-width: 479px) {
     .app-shell {
         background:
-            radial-gradient(circle at top right, rgba(124,58,237,.08), transparent 40%),
-            linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 100%);
+            radial-gradient(
+                circle at top right,
+                rgba(124, 58, 237, 0.08),
+                transparent 40%
+            ),
+            linear-gradient(
+                180deg,
+                #f8fafc 0%,
+                #eef2ff 100%
+            );
+
+        background-attachment: scroll;
     }
-    .main-content { padding: 0 16px 24px; }
-    .content-wrapper { gap: 16px; }
-    .chat-section { gap: 12px; }
-    .chat-card { border-radius: 20px; }
-    .chat-card__footer { padding: 16px; }
+
+    .main-content {
+        padding: 0 16px 24px;
+    }
+
+    .content-wrapper {
+        gap: 16px;
+    }
+
+    .chat-section {
+        gap: 12px;
+    }
+
+    .chat-card {
+        border-radius: 20px;
+    }
+
+    .chat-card__footer {
+        padding: 16px;
+    }
 }
 
-/* Tablet: 480px - 768px */
 @media (min-width: 480px) and (max-width: 768px) {
-    .main-content { padding: 0 24px 32px; }
-    .chat-card { border-radius: 24px; }
+    .app-shell {
+        background-attachment: scroll;
+    }
+
+    .main-content {
+        padding: 0 24px 32px;
+    }
+
+    .chat-card {
+        border-radius: 24px;
+    }
 }
 
-/* Desktop: > 1024px */
 @media (min-width: 1025px) {
-    .main-content { padding: 0 32px 40px; }
+    .main-content {
+        padding: 0 32px 40px;
+    }
 }
-
