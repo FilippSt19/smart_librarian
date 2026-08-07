@@ -14,8 +14,7 @@ from app.engine.tools.summary_tool import SummaryTool
 
 class RecommendationService:
 
-    def __init__(self):
-
+    def __init__(self) -> None:
         self.settings = get_settings()
 
         self.chain = RecommendationChain(
@@ -32,8 +31,6 @@ class RecommendationService:
     def recommend(
         self,
         query: str,
-    ) -> str:
+    ) -> dict[str, str]:
 
-        return self.chain.run(
-            query
-        )
+        return self.chain.run(query)

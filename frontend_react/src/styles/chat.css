@@ -368,3 +368,29 @@
     overflow:auto;
 
 }
+
+.message-body {
+    min-width: 0;
+}
+
+.message-body--recommendation {
+    width: min(760px, 85%);
+}
+
+.message-body--recommendation .book-card {
+    animation: recommendationAppear .35s ease;
+}
+
+@keyframes recommendationAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}

@@ -8,5 +8,13 @@ class ChatRequest(BaseModel):
     )
 
 
+class BookRecommendation(BaseModel):
+    title: str
+    author: str
+    genre: str
+    reason: str
+    summary: str
+
+
 class ChatResponse(BaseModel):
-    response: str
+    recommendation: BookRecommendation

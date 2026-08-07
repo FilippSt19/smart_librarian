@@ -1,21 +1,31 @@
-import "../styles/chat.css";
 import ReactMarkdown from "react-markdown";
 import { FaRobot } from "react-icons/fa";
 
+import BookRecommendationCard from "./BookRecommendationCard";
+
+import type {
+    BookRecommendation,
+} from "../types/chat";
+
+import "../styles/chat.css";
+
+
 type ChatMessageProps = {
     role: "user" | "assistant";
-    content: string;
+    content?: string;
+    recommendation?: BookRecommendation;
 };
+
 
 export default function ChatMessage({
     role,
     content,
+    recommendation,
 }: ChatMessageProps) {
 
     const isUser = role === "user";
 
     return (
-
         <div
             className={
                 isUser
@@ -27,37 +37,47 @@ export default function ChatMessage({
             {!isUser && (
 
                 <div className="message-avatar assistant-avatar">
-
                     <FaRobot />
-
                 </div>
 
             )}
 
-            <div className="message-bubble">
+            <div
+                className={
+                    recommendation
+                        ? "message-body message-body--recommendation"
+                        : "message-bubble"
+                }
+            >
 
-                <div className="message-role">
+                {!isUser && !recommendation && (
 
-                    {isUser
-                        ? "You"
-                        : "Smart Librarian"}
+                    <div className="message-role">
+                        Smart Librarian
+                    </div>
 
-                </div>
+                )}
 
-                <div className="message-content">
+                {content && (
 
-                    <ReactMarkdown>
-                        {content}
-                    </ReactMarkdown>
+                    <div className="message-content">
+                        <ReactMarkdown>
+                            {content}
+                        </ReactMarkdown>
+                    </div>
 
-                </div>
+                )}
+
+                {recommendation && (
+
+                    <BookRecommendationCard
+                        recommendation={recommendation}
+                    />
+
+                )}
 
             </div>
 
-
-
         </div>
-
     );
-
 }

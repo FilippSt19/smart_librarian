@@ -6,25 +6,32 @@ import ChatWindow from "./components/ChatWindow";
 import ChatInput from "./components/ChatInput";
 
 import { sendMessage } from "./services/api";
+
+import type {
+    ChatMessage,
+} from "./types/chat";
+
 import "./styles/app.css";
 
-import type { ChatMessage } from "./types/chat";
 
 function App() {
 
-    const [messages, setMessages] = useState<ChatMessage[]>([
-        {
-            id: crypto.randomUUID(),
-            role: "assistant",
-            content:
-                "Hello! 👋\n\nTell me what kind of book you are looking for.",
-        },
-    ]);
+    const [messages, setMessages] =
+        useState<ChatMessage[]>([
+            {
+                id: crypto.randomUUID(),
+                role: "assistant",
+                content:
+                    "Hello! Tell me what kind of book you are looking for.",
+            },
+        ]);
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] =
+        useState(false);
+
 
     async function handleSend(
-        message: string
+        message: string,
     ) {
 
         const userMessage: ChatMessage = {
@@ -42,12 +49,14 @@ function App() {
 
         try {
 
-            const result = await sendMessage(message);
+            const result =
+                await sendMessage(message);
 
             const assistantMessage: ChatMessage = {
                 id: crypto.randomUUID(),
                 role: "assistant",
-                content: result.response,
+                recommendation:
+                    result.recommendation,
             };
 
             setMessages((previous) => [
@@ -63,7 +72,7 @@ function App() {
                 id: crypto.randomUUID(),
                 role: "assistant",
                 content:
-                    "❌ Sorry, something went wrong while contacting the backend.",
+                    "Sorry, something went wrong while contacting the backend.",
             };
 
             setMessages((previous) => [
@@ -79,39 +88,48 @@ function App() {
 
     }
 
+
     return (
+
         <div className="app-shell">
+
             <Navbar />
 
             <main className="main-content">
+
                 <div className="content-wrapper">
+
                     <Header
                         title="What would you like to read today?"
-                        subtitle="Describe your favorite genres, authors or themes and I'll recommend the perfect book."
+                        subtitle="Describe your favorite genres, authors or themes and Smart Librarian will recommend the perfect book."
                     />
 
-                    <section className="chat-section">
-                        <div className="chat-card">
+                    <div className="chat-card">
 
-                            <ChatWindow
-                                messages={messages}
-                                loading={loading}
+                        <ChatWindow
+                            messages={messages}
+                            loading={loading}
+                        />
+
+                        <div className="chat-card__footer">
+
+                            <ChatInput
+                                onSend={handleSend}
                             />
 
-                            <div className="chat-card__footer">
-
-                                <ChatInput
-                                    onSend={handleSend}
-                                />
-
-                            </div>
-
                         </div>
-                    </section>
+
+                    </div>
+
                 </div>
+
             </main>
+
         </div>
+
     );
+
 }
+
 
 export default App;

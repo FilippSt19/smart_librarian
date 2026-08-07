@@ -6,10 +6,12 @@ import type {
 
 import { useAutoScroll } from "../hooks/useAutoScroll";
 
+
 type Props = {
     messages: Message[];
     loading: boolean;
 };
+
 
 export default function ChatWindow({
     messages,
@@ -19,29 +21,36 @@ export default function ChatWindow({
     const bottomRef = useAutoScroll(messages);
 
     return (
-        <div className="chat-window">
+        <section className="chat-window">
 
-            {messages.map((message) => (
+            <div className="chat-window__content">
 
-                <ChatMessage
-                    key={message.id}
-                    role={message.role}
-                    content={message.content}
-                />
+                {messages.map((message) => (
 
-            ))}
+                    <ChatMessage
+                        key={message.id}
+                        role={message.role}
+                        content={message.content}
+                        recommendation={
+                            message.recommendation
+                        }
+                    />
 
-            {loading && (
+                ))}
 
-                <ChatMessage
-                    role="assistant"
-                    content="⏳ Thinking..."
-                />
+                {loading && (
 
-            )}
+                    <ChatMessage
+                        role="assistant"
+                        content="Finding the best match for you..."
+                    />
 
-            <div ref={bottomRef} />
+                )}
 
-        </div>
+                <div ref={bottomRef} />
+
+            </div>
+
+        </section>
     );
 }

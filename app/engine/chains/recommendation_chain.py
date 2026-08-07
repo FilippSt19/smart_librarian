@@ -33,7 +33,6 @@ class RecommendationChain:
         context = []
 
         for document in documents:
-
             context.append(
                 (
                     f"Title: {document['title']}\n"
@@ -43,10 +42,64 @@ class RecommendationChain:
 
         return "\n\n".join(context)
 
+    @staticmethod
+    def _parse_recommendation(
+        content: str | None,
+    ) -> dict[str, str]:
+
+        if not content:
+            raise ValueError(
+                "No recommendation generated."
+            )
+
+        try:
+            recommendation = json.loads(content)
+        except json.JSONDecodeError as exc:
+            raise ValueError(
+                "Model returned invalid JSON."
+            ) from exc
+
+        required_fields = {
+            "title",
+            "author",
+            "genre",
+            "reason",
+            "summary",
+        }
+
+        missing_fields = (
+            required_fields
+            - recommendation.keys()
+        )
+
+        if missing_fields:
+            raise ValueError(
+                "Missing recommendation fields: "
+                + ", ".join(sorted(missing_fields))
+            )
+
+        return {
+            "title": str(
+                recommendation["title"]
+            ),
+            "author": str(
+                recommendation["author"]
+            ),
+            "genre": str(
+                recommendation["genre"]
+            ),
+            "reason": str(
+                recommendation["reason"]
+            ),
+            "summary": str(
+                recommendation["summary"]
+            ),
+        }
+
     def run(
         self,
         query: str,
-    ) -> str:
+    ) -> dict[str, str]:
 
         documents = self.retriever.retrieve(
             query=query,
@@ -64,20 +117,18 @@ class RecommendationChain:
             },
             {
                 "role": "user",
-                "content": f"""
-Context:
-
-{context}
-
-User request:
-
-{query}
-""",
+                "content": (
+                    "Context:\n\n"
+                    f"{context}\n\n"
+                    "User request:\n\n"
+                    f"{query}"
+                ),
             },
         ]
 
         response = (
-            self.provider.client.chat.completions.create(
+            self.provider.client
+            .chat.completions.create(
                 model=self.settings.chat_model,
                 temperature=self.settings.temperature,
                 messages=messages,
@@ -89,10 +140,8 @@ User request:
         message = response.choices[0].message
 
         if not message.tool_calls:
-
-            return (
+            return self._parse_recommendation(
                 message.content
-                or "No response generated."
             )
 
         tool_call = message.tool_calls[0]
@@ -117,17 +166,21 @@ User request:
         )
 
         final_response = (
-            self.provider.client.chat.completions.create(
+            self.provider.client
+            .chat.completions.create(
                 model=self.settings.chat_model,
                 temperature=self.settings.temperature,
                 messages=messages,
             )
         )
 
-        return (
+        final_content = (
             final_response
             .choices[0]
             .message
             .content
-            or "No response generated."
+        )
+
+        return self._parse_recommendation(
+            final_content
         )

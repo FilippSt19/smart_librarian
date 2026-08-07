@@ -1,15 +1,30 @@
-export type Role = "user" | "assistant";
+export type ChatRole =
+    | "user"
+    | "assistant";
 
-export interface ChatMessage {
+
+export type BookRecommendation = {
+    title: string;
+    author: string;
+    genre: string;
+    reason: string;
+    summary: string;
+};
+
+
+export type ChatMessage = {
     id: string;
-    role: Role;
-    content: string;
-}
+    role: ChatRole;
+    content?: string;
+    recommendation?: BookRecommendation;
+};
 
-export interface ChatRequest {
+
+export type ChatRequest = {
     query: string;
-}
+};
 
-export interface ChatResponse {
-    response: string;
-}
+
+export type ChatResponse = {
+    recommendation: BookRecommendation;
+};

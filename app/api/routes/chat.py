@@ -1,11 +1,11 @@
-import traceback
-
 from fastapi import APIRouter, HTTPException, status
 
-from app.api.schemas.chat import ChatRequest, ChatResponse
-from app.engine.agents.factory import (
-    AgentFactory,
+from app.api.schemas.chat import (
+    BookRecommendation,
+    ChatRequest,
+    ChatResponse,
 )
+from app.engine.agents.factory import AgentFactory
 
 
 router = APIRouter(
@@ -23,19 +23,20 @@ agent = AgentFactory.create()
 def chat(
     request: ChatRequest,
 ) -> ChatResponse:
+
     try:
-        response = agent.chat(
+        recommendation = agent.chat(
             request.query
         )
 
         return ChatResponse(
-            response=response
+            recommendation=BookRecommendation(
+                **recommendation
+            )
         )
 
     except Exception as exc:
-        traceback.print_exc()
-
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=str(exc),
+            detail="Failed to generate recommendation.",
         ) from exc
