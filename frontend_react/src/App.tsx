@@ -299,12 +299,21 @@ function App() {
             const result =
                 await sendMessage(message);
 
-            const assistantMessage: ChatMessage = {
-                id: crypto.randomUUID(),
-                role: "assistant",
-                recommendation:
-                    result.recommendation,
-            };
+            const assistantMessage: ChatMessage =
+                result.recommendation
+                    ? {
+                        id: crypto.randomUUID(),
+                        role: "assistant",
+                        recommendation:
+                            result.recommendation,
+                    }
+                    : {
+                        id: crypto.randomUUID(),
+                        role: "assistant",
+                        content:
+                            result.message ??
+                            "Sorry, I could not process that request.",
+                    };
 
             updateConversation(
                 conversationId,
