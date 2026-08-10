@@ -127,6 +127,71 @@
     overflow-wrap: break-word;
 }
 
+.book-card__section-header {
+    margin-bottom: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+}
+
+.book-card__section-header h3 {
+    margin: 0;
+}
+
+.book-card__listen {
+    flex-shrink: 0;
+
+    padding: 8px 12px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    background: #eef2ff;
+
+    border: 1px solid #c7d2fe;
+    border-radius: 12px;
+
+    color: #4f46e5;
+
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.book-card__listen:hover {
+    background: #e0e7ff;
+
+    border-color: #a5b4fc;
+
+    transform: translateY(-1px);
+}
+
+.book-card__listen:active {
+    transform: scale(0.97);
+}
+
+.book-card__listen--active {
+    background: #fef2f2;
+
+    border-color: #fecaca;
+
+    color: #dc2626;
+}
+
 /* Mobile */
 @media (max-width: 479px) {
     .book-card {
