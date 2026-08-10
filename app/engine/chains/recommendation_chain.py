@@ -10,6 +10,18 @@ SYSTEM_PROMPT = PromptLoader.load(
     )
 )
 
+INTENT_PROMPT = PromptLoader.load(
+    Path(
+        "app/engine/prompts/intent_classifier.md"
+    )
+)
+
+CONVERSATION_PROMPT = PromptLoader.load(
+    Path(
+        "app/engine/prompts/conversation.md"
+    )
+)
+
 
 class RecommendationChain:
 
@@ -24,6 +36,40 @@ class RecommendationChain:
         self.provider = provider
         self.registry = registry
         self.settings = settings
+
+    def classify_intent(
+        self,
+        query: str,
+    ) -> str:
+
+        response = self.provider.generate(
+            prompt=query,
+            system_prompt=INTENT_PROMPT,
+            temperature=0,
+        )
+
+        try:
+            result = json.loads(response)
+        except json.JSONDecodeError:
+            return "book"
+
+        intent = result.get("intent")
+
+        if intent == "conversation":
+            return "conversation"
+
+        return "book"
+
+    def respond_to_conversation(
+        self,
+        query: str,
+    ) -> str:
+
+        return self.provider.generate(
+            prompt=query,
+            system_prompt=CONVERSATION_PROMPT,
+            temperature=0.3,
+        )
 
     def build_context(
         self,
@@ -99,7 +145,16 @@ class RecommendationChain:
     def run(
         self,
         query: str,
-    ) -> dict[str, str]:
+    ) -> dict[str, str] | str:
+
+        intent = self.classify_intent(
+            query
+        )
+
+        if intent == "conversation":
+            return self.respond_to_conversation(
+                query
+            )
 
         documents = self.retriever.retrieve(
             query=query,
@@ -133,12 +188,7 @@ class RecommendationChain:
                 temperature=self.settings.temperature,
                 messages=messages,
                 tools=self.registry.schemas(),
-                tool_choice={
-                    "type": "function",
-                    "function": {
-                        "name": "get_summary_by_title",
-                    },
-                },
+                tool_choice="auto",
             )
         )
 
