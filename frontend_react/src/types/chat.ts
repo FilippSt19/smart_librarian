@@ -35,5 +35,6 @@ export type ChatRequest = {
 
 
 export type ChatResponse = {
-    recommendation: BookRecommendation;
+    recommendation?: BookRecommendation;
+    message?: string;
 };

@@ -25,13 +25,18 @@ def chat(
 ) -> ChatResponse:
 
     try:
-        recommendation = agent.chat(
+        result = agent.chat(
             request.query
         )
 
+        if isinstance(result, str):
+            return ChatResponse(
+                message=result,
+            )
+
         return ChatResponse(
             recommendation=BookRecommendation(
-                **recommendation
+                **result
             )
         )
 

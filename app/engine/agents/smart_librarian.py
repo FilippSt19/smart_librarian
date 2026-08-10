@@ -6,22 +6,17 @@ from app.services.recommendation_service import (
 
 class SmartLibrarianAgent(BaseAgent):
 
-    def __init__(self):
-
+    def __init__(self) -> None:
         self.service = RecommendationService()
 
     def run(
         self,
         query: str,
-    ) -> str:
-
+    ) -> dict[str, str] | str:
         return self.chat(query)
 
     def chat(
         self,
         query: str,
-    ) -> str:
-
-        return self.service.recommend(
-            query
-        )
+    ) -> dict[str, str] | str:
+        return self.service.recommend(query)
