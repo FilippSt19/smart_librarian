@@ -133,7 +133,12 @@ class RecommendationChain:
                 temperature=self.settings.temperature,
                 messages=messages,
                 tools=self.registry.schemas(),
-                tool_choice="auto",
+                tool_choice={
+                    "type": "function",
+                    "function": {
+                        "name": "get_summary_by_title",
+                    },
+                },
             )
         )
 
