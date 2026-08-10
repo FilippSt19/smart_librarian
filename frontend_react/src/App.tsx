@@ -47,6 +47,17 @@ function createConversation(): Conversation {
 }
 
 
+function hasUserMessages(
+    conversation: Conversation,
+): boolean {
+
+    return conversation.messages.some(
+        (message) =>
+            message.role === "user",
+    );
+}
+
+
 function createConversationTitle(
     message: string,
 ): string {
@@ -83,7 +94,16 @@ function loadConversations(): Conversation[] {
             return [createConversation()];
         }
 
-        return parsedConversations;
+        const meaningfulConversations =
+            parsedConversations.filter(
+                hasUserMessages,
+            );
+
+        if (meaningfulConversations.length === 0) {
+            return [createConversation()];
+        }
+
+        return meaningfulConversations;
 
     } catch (error) {
 
@@ -118,9 +138,16 @@ function App() {
 
     useEffect(() => {
 
+        const conversationsToStore =
+            conversations.filter(
+                hasUserMessages,
+            );
+
         localStorage.setItem(
             STORAGE_KEY,
-            JSON.stringify(conversations),
+            JSON.stringify(
+                conversationsToStore,
+            ),
         );
 
     }, [conversations]);
@@ -142,6 +169,15 @@ function App() {
 
 
     function handleNewConversation() {
+
+        if (
+            activeConversation &&
+            !hasUserMessages(
+                activeConversation,
+            )
+        ) {
+            return;
+        }
 
         const conversation =
             createConversation();
@@ -263,21 +299,12 @@ function App() {
             const result =
                 await sendMessage(message);
 
-            const assistantMessage: ChatMessage =
-                result.recommendation
-                    ? {
-                        id: crypto.randomUUID(),
-                        role: "assistant",
-                        recommendation:
-                            result.recommendation,
-                    }
-                    : {
-                        id: crypto.randomUUID(),
-                        role: "assistant",
-                        content:
-                            result.message ??
-                            "Sorry, I could not process that request.",
-                    };
+            const assistantMessage: ChatMessage = {
+                id: crypto.randomUUID(),
+                role: "assistant",
+                recommendation:
+                    result.recommendation,
+            };
 
             updateConversation(
                 conversationId,
@@ -323,13 +350,20 @@ function App() {
     }
 
 
-    const sortedConversations = [
-        ...conversations,
-    ].sort(
-        (first, second) =>
-            new Date(second.updatedAt).getTime() -
-            new Date(first.updatedAt).getTime(),
-    );
+    const sortedConversations =
+        conversations
+            .filter(
+                hasUserMessages,
+            )
+            .sort(
+                (first, second) =>
+                    new Date(
+                        second.updatedAt,
+                    ).getTime() -
+                    new Date(
+                        first.updatedAt,
+                    ).getTime(),
+            );
 
 
     return (
