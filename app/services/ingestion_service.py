@@ -1,3 +1,4 @@
+import hashlib
 from pathlib import Path
 
 from app.repositories import ChromaBookRepository
@@ -6,11 +7,25 @@ from app.services.embedding_service import EmbeddingService
 
 class IngestionService:
 
-    def __init__(self):
-
+    def __init__(self) -> None:
         self.embedding_service = EmbeddingService()
-
         self.repository = ChromaBookRepository()
+
+    @staticmethod
+    def _create_document_id(
+        title: str,
+    ) -> str:
+        normalized_title = (
+            title.strip()
+            .lower()
+            .encode("utf-8")
+        )
+
+        title_hash = hashlib.sha256(
+            normalized_title
+        ).hexdigest()[:16]
+
+        return f"book_{title_hash}"
 
     def ingest(
         self,
@@ -29,7 +44,7 @@ class IngestionService:
             if book.strip()
         ]
 
-        for index, book in enumerate(books):
+        for book in books:
 
             title = book.split("\n")[0].strip()
 
@@ -40,7 +55,9 @@ class IngestionService:
             )
 
             self.repository.add_document(
-                document_id=f"book_{index+1}",
+                document_id=self._create_document_id(
+                    title
+                ),
                 document=book,
                 embedding=embedding,
                 metadata={

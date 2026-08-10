@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     openai_api_key: str
     chat_model: str = "gpt-4.1-mini"
     embedding_model: str = "text-embedding-3-small"
+    image_model: str = "gpt-image-2"
 
     # ChromaDB
     chroma_db_path: str = "data/chroma_db"

@@ -9,6 +9,9 @@ from app.api.routes.health import router as health_router
 from app.api.routes.ingestion import (
     router as ingestion_router,
 )
+from app.api.routes.images import (
+    router as images_router,
+)
 from app.common.exception_handlers import (
     register_exception_handlers,
 )
@@ -37,6 +40,11 @@ def create_app() -> FastAPI:
 
     app.include_router(
         ingestion_router,
+        prefix="/api/v1",
+    )
+
+    app.include_router(
+        images_router,
         prefix="/api/v1",
     )
 

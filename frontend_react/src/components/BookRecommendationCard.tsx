@@ -4,9 +4,14 @@ import {
 } from "react";
 
 import {
+    FaImage,
     FaStop,
     FaVolumeHigh,
 } from "react-icons/fa6";
+
+import {
+    generateBookArtwork,
+} from "../services/api";
 
 import type {
     BookRecommendation,
@@ -26,6 +31,15 @@ export default function BookRecommendationCard({
 
     const [isSpeaking, setIsSpeaking] =
         useState(false);
+
+    const [artwork, setArtwork] =
+        useState<string | null>(null);
+
+    const [isGeneratingArtwork, setIsGeneratingArtwork] =
+        useState(false);
+
+    const [artworkError, setArtworkError] =
+        useState<string | null>(null);
 
 
     useEffect(() => {
@@ -79,6 +93,47 @@ export default function BookRecommendationCard({
         window.speechSynthesis.speak(
             utterance,
         );
+    }
+
+
+    async function handleGenerateArtwork() {
+
+        if (isGeneratingArtwork) {
+            return;
+        }
+
+        setIsGeneratingArtwork(true);
+        setArtworkError(null);
+
+        try {
+
+            const result =
+                await generateBookArtwork({
+                    title: recommendation.title,
+                    author: recommendation.author,
+                    genre: recommendation.genre,
+                    summary: recommendation.summary,
+                });
+
+            setArtwork(
+                `data:image/png;base64,${result.image}`,
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Artwork generation failed.",
+                error,
+            );
+
+            setArtworkError(
+                "Could not generate artwork. Please try again.",
+            );
+
+        } finally {
+
+            setIsGeneratingArtwork(false);
+        }
     }
 
 
@@ -140,11 +195,6 @@ export default function BookRecommendationCard({
                                 ? "Stop reading summary"
                                 : "Read summary aloud"
                         }
-                        title={
-                            isSpeaking
-                                ? "Stop"
-                                : "Listen"
-                        }
                     >
                         {isSpeaking
                             ? <FaStop />
@@ -164,6 +214,44 @@ export default function BookRecommendationCard({
                 <p>
                     {recommendation.summary}
                 </p>
+
+            </div>
+
+            <div className="book-card__artwork">
+
+                {artwork && (
+                    <img
+                        className="book-card__artwork-image"
+                        src={artwork}
+                        alt={
+                            `AI-generated artwork inspired by ${recommendation.title}`
+                        }
+                    />
+                )}
+
+                {artworkError && (
+                    <p className="book-card__artwork-error">
+                        {artworkError}
+                    </p>
+                )}
+
+                <button
+                    className="book-card__artwork-button"
+                    type="button"
+                    onClick={handleGenerateArtwork}
+                    disabled={isGeneratingArtwork}
+                >
+                    <FaImage />
+
+                    <span>
+                        {isGeneratingArtwork
+                            ? "Generating..."
+                            : artwork
+                                ? "Generate again"
+                                : "Generate artwork"
+                        }
+                    </span>
+                </button>
 
             </div>
 

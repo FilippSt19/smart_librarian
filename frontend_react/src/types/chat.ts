@@ -38,3 +38,16 @@ export type ChatResponse = {
     recommendation?: BookRecommendation;
     message?: string;
 };
+
+
+export type BookArtworkRequest = {
+    title: string;
+    author: string;
+    genre: string;
+    summary: string;
+};
+
+
+export type BookArtworkResponse = {
+    image: string;
+};

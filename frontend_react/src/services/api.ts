@@ -1,6 +1,8 @@
 import axios from "axios";
 
 import type {
+    BookArtworkRequest,
+    BookArtworkResponse,
     ChatRequest,
     ChatResponse,
 } from "../types/chat";
@@ -25,6 +27,19 @@ export async function sendMessage(
         "/api/v1/chat",
         request,
     );
+
+    return response.data;
+}
+
+export async function generateBookArtwork(
+    request: BookArtworkRequest,
+): Promise<BookArtworkResponse> {
+
+    const response =
+        await api.post<BookArtworkResponse>(
+            "/api/v1/images/book-artwork",
+            request,
+        );
 
     return response.data;
 }
