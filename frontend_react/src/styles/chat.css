@@ -287,7 +287,7 @@
         0 0 0 4px rgba(99, 102, 241, 0.12);
 }
 
-.chat-input button {
+.chat-input__send {
     width: 58px;
     height: 58px;
 
@@ -315,15 +315,63 @@
     transition: 0.25s;
 }
 
-.chat-input button:hover {
+.chat-input__send:hover {
     transform: translateY(-2px);
 
     box-shadow:
         0 12px 24px rgba(79, 70, 229, 0.3);
 }
 
-.chat-input button:active {
+.chat-input__send:active {
     transform: scale(0.97);
+}
+
+.chat-input__microphone {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+
+    border: 1px solid #c7d2fe;
+    border-radius: 16px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.chat-input__microphone:hover {
+    background: #e0e7ff;
+
+    border-color: #a5b4fc;
+
+    transform: translateY(-1px);
+}
+
+.chat-input__microphone:active {
+    transform: scale(0.97);
+}
+
+.chat-input__microphone--active {
+    background: #fef2f2;
+
+    border-color: #fecaca;
+
+    color: #dc2626;
 }
 
 .typing-indicator {
@@ -491,11 +539,20 @@
         font-size: 14px;
     }
 
-    .chat-input button {
+    .chat-input__send {
         width: 50px;
         height: 50px;
 
         border-radius: 16px;
+    }
+
+    .chat-input__microphone {
+        width: 44px;
+        height: 44px;
+
+        border-radius: 14px;
+
+        font-size: 14px;
     }
 }
 
